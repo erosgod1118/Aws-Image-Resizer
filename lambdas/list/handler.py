@@ -11,8 +11,8 @@ endpoint_url = None
 if os.getenv("STAGE") == "local":
   endpoint_url = "https://localhost.localstack.cloud:4566"
 
-s3 = boto3.client("s3", endpoint_url=endpoint_url)
-ssm = boto3.client("ssm", endpoint_url=endpoint_url)
+s3: "S3Client" = boto3.client("s3", endpoint_url=endpoint_url)
+ssm: "SSMClient" = boto3.client("ssm", endpoint_url=endpoint_url)
 
 def get_bucket_name_images() -> str:
   parameter = ssm.get_parameter(Name="/localstack-thumbnail-app/buckets/images")
